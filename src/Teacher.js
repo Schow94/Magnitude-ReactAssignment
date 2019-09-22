@@ -30,7 +30,14 @@ function Teacher() {
       // console.log(x.classId);
       const studentsInClass = x.students.map(y => {
         // console.log(y.name.last);
-        return <li key={y.studentId}>{y.name.last}</li>;
+        return (
+          <li key={y.studentId}>
+            {y.studentName.first} {y.studentName.last}
+            <span style={{ marginLeft: '1em' }}>
+              <strong>Grade: {y.grade}</strong>
+            </span>
+          </li>
+        );
       });
       return (
         <div className="Subject" key={x.classId}>

@@ -1,93 +1,116 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 import useInputState from './hooks/useInputState';
 import { ScheduleContext } from './contexts/ScheduleContext';
-import { ClassSizeContext } from './contexts/ClassSizeContext';
-import Select from './Select';
+// import { ClassSizeContext } from './contexts/ClassSizeContext';
+// import Select from './Select';
 import uuid from 'uuid/v4';
 
 export default function AddForm(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
-  const { num } = useContext(ClassSizeContext);
+  // const { num } = useContext(ClassSizeContext);
 
   const [period, handlePeriodChange, resetPeriod] = useInputState('');
   const [subject, handleSubjectChange, resetSubject] = useInputState('');
+  const [grade, handleGradeChange, resetGrade] = useInputState('');
 
-  // const [students, setStudents] = useInputState();
-  const [last, handleLastNameChange, resetLast] = useInputState('');
-  const [first, handleFirstNameChange, resetFirst] = useInputState('');
+  const [students, setStudents] = useState([
+    {
+      studentId: uuid(),
+      studentName: { first: 'Kobe', last: 'Bryant' },
+      grade: 9
+    }
+  ]);
 
-  // const handleStudentInputChange = () => {
-  //   const newStudentList = [
-  //     ...students,
-  //     [{ name: { first: '', last: '' }, grade: '' }]
-  //   ];
-  //   setStudents(newStudentList);
-  // };
+  const handleStudentInputChange = i => e => {
+    const newStudentList = students.map((x, idx) => {
+      // console.log(prevInput);
+      if (i !== idx) {
+        return x;
+      }
+
+      const { studentName } = { ...x };
+      const currentState = studentName;
+      const { name, value } = e.target;
+      currentState[name] = value;
+
+      console.log('currState: ', currentState);
+
+      return {
+        ...x,
+        studentName: currentState
+      };
+    });
+    setStudents(newStudentList);
+  };
 
   const renderStudentInputs = () => {
-    var numInputs = [];
-    // var numInputs = [{ name: { first: '', last: '' }, grade: '' }];
-
-    for (let i = 1; i <= num; i++) {
-      numInputs.push(
+    return students.map((x, i) => {
+      return (
         <div key={i}>
+          <h4>{`Student ${i + 1}`}</h4>
           <input
-            autoComplete="off"
-            onChange={handleFirstNameChange}
+            type="text"
+            placeholder={`First Name`}
+            value={x.studentName.first}
+            onChange={handleStudentInputChange(i)}
             name="first"
-            placeholder="first"
-            value={first}
           />
           <input
-            autoComplete="off"
-            onChange={handleLastNameChange}
+            type="text"
+            placeholder={`Last Name`}
+            value={x.studentName.last}
+            onChange={handleStudentInputChange(i)}
             name="last"
-            placeholder="last"
-            value={last}
+          />
+          <input
+            type="number"
+            placeholder={`Grade Level`}
+            value={x.grade}
+            onChange={handleGradeChange(i)}
+            name="grade"
           />
         </div>
       );
-    }
-    return numInputs;
+    });
+  };
+
+  const addAnotherStudent = e => {
+    e.preventDefault();
+    setStudents([
+      ...students,
+      { studentId: uuid(), studentName: { first: '', last: '' }, grade: '' }
+    ]);
+    console.log('students', students);
   };
 
   const addNewClass = e => {
     e.preventDefault();
 
-    // let studentList = [];
-
-    // for (let i = 0; i < num; i++){
-    //   studentList.push()
-    // }
+    console.log(students);
 
     let newClass = {
       classId: uuid(),
       subject: subject,
       period: period,
-      students: [
-        //might be wise to store name:
-        {
-          studentId: uuid(),
-          name: { first: first, last: last },
-          grade: 9
-        }
-      ]
+      students: students
     };
+
     console.log(newClass);
+
     setSchedule([newClass, ...schedule]);
 
+    //Clearing Form
     resetPeriod();
     resetSubject();
-    resetFirst();
-    resetLast();
+    setStudents([
+      { studentId: uuid(), studentName: { first: '', last: '' }, grade: '' }
+    ]);
   };
 
   return (
     <div>
       <h1>Add a new class</h1>
-      <h5>How many students are in this class?</h5>
-      <Select />
       <form onSubmit={addNewClass}>
         <input
           autoComplete="off"
@@ -105,19 +128,7 @@ export default function AddForm(props) {
         />
 
         {renderStudentInputs()}
-        {/* <input
-            onChange={this.handleChange}
-            name="first"
-            placeholder="first"
-            value={this.state.first}
-          />
-
-          <input
-            onChange={this.handleChange}
-            name="last"
-            placeholder="last"
-            value={this.state.last}
-          /> */}
+        <button onClick={addAnotherStudent}>Add another student</button>
         <button>Add New Class</button>
       </form>
     </div>
