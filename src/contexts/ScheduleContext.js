@@ -28,7 +28,7 @@ const initialVal = [
       {
         studentId: uuid(),
         first: 'Jacob',
-        last: 'Mandel',
+        last: 'Marson',
         grade: 9
       },
       {
@@ -67,7 +67,7 @@ const initialVal = [
       {
         studentId: uuid(),
         first: 'Samuel',
-        last: 'Mandel',
+        last: 'Lohn',
         grade: 11
       },
       {
@@ -150,8 +150,8 @@ const initialVal = [
       //might be wise to store name:
       {
         studentId: uuid(),
-        first: 'Stephen',
-        last: 'Chow',
+        first: 'Stefan',
+        last: 'Cho',
         grade: 9
       },
       {

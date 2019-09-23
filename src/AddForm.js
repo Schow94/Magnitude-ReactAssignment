@@ -19,7 +19,7 @@ export default function AddForm(props) {
       studentId: uuid(),
       first: '',
       last: '',
-      grade: 9
+      grade: ''
     }
   ]);
 
