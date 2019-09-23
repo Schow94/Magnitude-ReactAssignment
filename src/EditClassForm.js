@@ -1,14 +1,11 @@
 import React, { useContext, useState } from 'react';
+import uuid from 'uuid/v4';
 
 import useInputState from './hooks/useInputState';
 import { ScheduleContext } from './contexts/ScheduleContext';
-// import { ClassSizeContext } from './contexts/ClassSizeContext';
-// import Select from './Select';
-import uuid from 'uuid/v4';
 
-export default function AddForm(props) {
+export default function EditForm(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
-  // const { num } = useContext(ClassSizeContext);
 
   const [period, handlePeriodChange, resetPeriod] = useInputState('');
   const [subject, handleSubjectChange, resetSubject] = useInputState('');
@@ -23,17 +20,6 @@ export default function AddForm(props) {
     }
   ]);
 
-  // structure of students INPUT:
-  // students = [
-  //  {id:uuid(), first: '', last: '', grade: ''},
-  // {id:uuid(), first: '', last: '', grade: ''}
-  // ]
-
-  // 2 callback fxns to get index that we're passing in from input and event object
-  // map through array of student input objects
-  // compare index that was passed up from onChange with the index/key from
-  // each student object
-
   const handleStudentInputChange = i => e => {
     const newStudentList = students.map((x, idx) => {
       // console.log(x);
@@ -43,9 +29,6 @@ export default function AddForm(props) {
       if (i !== idx) {
         return x;
       }
-      // if student is the one we want to modify, we iterate thru all its properties
-      // and modify {first, last, grade} and overwrite that students first,
-      // last,grade properties
       return {
         ...x,
         [e.target.name]: e.target.value
@@ -89,49 +72,10 @@ export default function AddForm(props) {
     });
   };
 
-  const addAnotherStudent = e => {
-    e.preventDefault();
-    // Adds an empty student input to students array
-    setStudents([
-      ...students,
-      { studentId: uuid(), first: '', last: '', grade: '' }
-    ]);
-    // console.log('students', students);
-  };
-
-  const removeStudentInput = e => {
-    e.preventDefault();
-    const newStudentList = students.filter((x, i) => i !== students.length - 2);
-    console.log(newStudentList);
-    setStudents(newStudentList);
-  };
-
-  const addNewClass = e => {
-    e.preventDefault();
-
-    // console.log(students);
-
-    let newClass = {
-      classId: uuid(),
-      subject: subject,
-      period: period,
-      students: students
-    };
-
-    // console.log(newClass);
-
-    setSchedule([newClass, ...schedule]);
-    // console.log(schedule);
-    //Clearing Form
-    resetPeriod();
-    resetSubject();
-    setStudents([{ studentId: uuid(), first: '', last: '', grade: '' }]);
-  };
-
   return (
     <div>
       <h1>Add a new class</h1>
-      <form onSubmit={addNewClass}>
+      <form>
         <button>Add New Class</button>
 
         <input
@@ -150,11 +94,9 @@ export default function AddForm(props) {
         />
 
         {renderStudentInputs()}
-        <button onClick={addAnotherStudent}>Add another student</button>
+        <button>Add another student</button>
 
-        {students.length === 1 ? null : (
-          <button onClick={removeStudentInput}>Remove extra student</button>
-        )}
+        {students.length === 1 ? null : <button>Remove extra student</button>}
       </form>
     </div>
   );

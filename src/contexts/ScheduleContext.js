@@ -15,32 +15,38 @@ const initialVal = [
       //might be wise to store name:
       {
         studentId: uuid(),
-        studentName: { first: 'Kylie', last: 'Jenner' },
+        first: 'Kylie',
+        last: 'Jenner',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Stephen', last: 'Chow' },
+        first: 'Stephen',
+        last: 'Chow',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Jacob', last: 'Mandel' },
+        first: 'Jacob',
+        last: 'Mandel',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Rogelio', last: 'Alonso' },
+        first: 'Rogelio',
+        last: 'Alonso',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Benjamin', last: 'Liu' },
+        first: 'Benjamin',
+        last: 'Liu',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Karen', last: 'Wong' },
+        first: 'Karen',
+        last: 'Wong',
         grade: 9
       }
     ]
@@ -54,32 +60,38 @@ const initialVal = [
     students: [
       {
         studentId: uuid(),
-        studentName: { first: 'Anika', last: 'Mandel' },
+        first: 'Anika',
+        last: 'Mandel',
         grade: 11
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Samuel', last: 'Mandel' },
+        first: 'Samuel',
+        last: 'Mandel',
         grade: 11
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Michal', last: 'Sakin' },
+        first: 'Michal',
+        last: 'Sakin',
         grade: 11
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Yulia', last: 'Mostovoy' },
+        first: 'Yulia',
+        last: 'Mostovoy',
         grade: 11
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Walfred', last: 'Ma' },
+        first: 'Walfred',
+        last: 'Ma',
         grade: 11
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Evan', last: 'Lee' },
+        first: 'Evan',
+        last: 'Lee',
         grade: 11
       }
     ]
@@ -93,32 +105,38 @@ const initialVal = [
     students: [
       {
         studentId: uuid(),
-        studentName: { first: 'Ukina', last: 'Sanford' },
+        first: 'Ukina',
+        last: 'Sanford',
         grade: 10
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Misako', last: 'Stillion' },
+        first: 'Misako',
+        last: 'Stillion',
         grade: 10
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Mort', last: 'Cowan' },
+        first: 'Mort',
+        last: 'Cowan',
         grade: 10
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Jennifer', last: 'Puck' },
+        first: 'Jennifer',
+        last: 'Puck',
         grade: 10
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Shivali', last: 'Chag' },
+        first: 'Shivali',
+        last: 'Chag',
         grade: 10
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Jason', last: 'Yu' },
+        first: 'Jason',
+        last: 'Yu',
         grade: 10
       }
     ]
@@ -127,40 +145,43 @@ const initialVal = [
   {
     classId: uuid(),
     subject: 'Music',
-    period: 1,
+    period: 4,
     students: [
       //might be wise to store name:
       {
         studentId: uuid(),
-        studentName: {
-          first: 'Stephen',
-          last: 'Chow'
-        },
+        first: 'Stephen',
+        last: 'Chow',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Cory', last: 'Gehr' },
+        first: 'Cory',
+        last: 'Gehr',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Austin', last: 'Bogar' },
+        first: 'Austin',
+        last: 'Bogar',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Greg', last: 'Vogt' },
+        first: 'Greg',
+        last: 'Vogt',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Matt', last: 'Perchman' },
+        first: 'Matt',
+        last: 'Perchman',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Michael', last: 'Sosa' },
+        first: 'Michael',
+        last: 'Sosa',
         grade: 9
       }
     ]
@@ -174,32 +195,38 @@ const initialVal = [
       //might be wise to store name:
       {
         studentId: uuid(),
-        studentName: { first: 'Kobe', last: 'Bryant' },
+        first: 'Kobe',
+        last: 'Bryant',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Shaquille', last: 'Oneill' },
+        first: 'Shaquille',
+        last: 'Oneill',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Derek', last: 'Fisher' },
+        first: 'Derek',
+        last: 'Fisher',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Pau', last: 'Gasol' },
+        first: 'Pau',
+        last: 'Gasol',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Andrew', last: 'Bynum' },
+        first: 'Andrew',
+        last: 'Bynum',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Steve', last: 'Blake' },
+        first: 'Steve',
+        last: 'Blake',
         grade: 9
       }
     ]
@@ -213,32 +240,38 @@ const initialVal = [
       //might be wise to store name:
       {
         studentId: uuid(),
-        studentName: { first: 'Dwight', last: 'Howard' },
+        first: 'Dwight',
+        last: 'Howard',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Matt', last: 'Barnes' },
+        first: 'Matt',
+        last: 'Barnes',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Phil', last: 'Jackson' },
+        first: 'Phil',
+        last: 'Jackson',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Jeremy', last: 'Lin' },
+        first: 'Jeremy',
+        last: 'Lin',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Lonzo', last: 'Ball' },
+        first: 'Lonzo',
+        last: 'Ball',
         grade: 9
       },
       {
         studentId: uuid(),
-        studentName: { first: 'Kentavious', last: 'Caldwell-Pope' },
+        first: 'Kentavious',
+        last: 'Caldwell-Pope',
         grade: 9
       }
     ]
