@@ -101,7 +101,7 @@ export default function AddForm(props) {
 
   const removeStudentInput = e => {
     e.preventDefault();
-    const newStudentList = students.filter((x, i) => i !== students.length - 2);
+    const newStudentList = students.filter((x, i) => i !== students.length - 1);
     console.log(newStudentList);
     setStudents(newStudentList);
   };
@@ -123,8 +123,6 @@ export default function AddForm(props) {
     setSchedule([newClass, ...schedule]);
     // console.log(schedule);
     //Clearing Form
-    resetPeriod();
-    resetSubject();
     setStudents([{ studentId: uuid(), first: '', last: '', grade: '' }]);
   };
 
