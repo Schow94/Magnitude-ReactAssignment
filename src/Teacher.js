@@ -1,5 +1,7 @@
 import React, { useContext, useState } from 'react';
 
+import withStyles from '@material-ui/core/styles/withStyles';
+import TextField from '@material-ui/core/TextField';
 import { ScheduleContext } from './contexts/ScheduleContext';
 import EditClassForm from './EditClassForm';
 import OneClass from './OneClass';
@@ -8,7 +10,10 @@ import OneStudent from './OneStudent';
 import useToggle from './hooks/useToggle';
 import useInputState from './hooks/useInputState';
 
-function Teacher() {
+function Teacher(props) {
+  const { classes } = props;
+  const { container, textField, dense, menu } = classes;
+
   const { schedule, setSchedule } = useContext(ScheduleContext);
 
   const [search, handleSearchChange] = useInputState('');
@@ -42,12 +47,15 @@ function Teacher() {
   return (
     //Search Bar goes here
     <>
-      <form>
-        <input
+      <form className={container} noValidate autoComplete="off">
+        <TextField
           type="text"
+          id="standard-name"
+          label="Find a student by name, grade, class"
+          className={textField}
           value={search}
           onChange={handleSearchChange}
-          placeholder="Find a student by name, grade, class"
+          margin="normal"
         />
       </form>
 
@@ -77,5 +85,22 @@ function Teacher() {
     </>
   );
 }
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 400
+  },
+  dense: {
+    marginTop: 19
+  },
+  menu: {
+    width: 200
+  }
+});
 
-export default Teacher;
+export default withStyles(styles)(Teacher);

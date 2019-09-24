@@ -1,11 +1,16 @@
 import React, { useContext } from 'react';
 
+import withStyles from '@material-ui/core/styles/withStyles';
+import EditIcon from '@material-ui/icons/Edit';
+import IconButton from '@material-ui/core/IconButton';
+import Button from '@material-ui/core/Button';
+
 import { ScheduleContext } from './contexts/ScheduleContext';
 import useToggle from './hooks/useToggle';
 import EditClassForm from './EditClassForm';
-import AddStudentToExistingClass from './AddStudentToExistingClass';
+import EditStudentForm from './EditStudentForm';
 
-export default function OneClass(props) {
+function OneClass(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
   const [isEditClassFormOn, toggleClassForm] = useToggle(false);
   const [isEditStudentFormOn, toggleStudentForm] = useToggle(false);
@@ -15,13 +20,11 @@ export default function OneClass(props) {
     subjectTitleContainer,
     subjectTitle,
     studentTitleContainer,
-    studentTitle,
-    deleteButton,
-    editButton,
-    button
+    studentTitle
   } = styles;
 
-  const { filteredClass, studentsInClass } = props;
+  const { filteredClass, studentsInClass, classes } = props;
+  const { deleteButton, editButton } = classes;
 
   // REMOVE CLASS
   const removeClass = clickedId => {
@@ -45,40 +48,55 @@ export default function OneClass(props) {
         <>
           <div style={subjectTitleContainer}>
             <h1 style={subjectTitle}>Subject: {filteredClass.subject}</h1>
-            <button style={editButton} onClick={() => editClass()}>
-              Edit Class
-            </button>
-
-            <button style={button} onClick={toggleStudentForm}>
-              Edit Students
-            </button>
-
-            <button
-              style={deleteButton}
+            <h1 style={subjectTitle}>Period: {filteredClass.period}</h1>
+            <Button className={editButton} onClick={() => editClass()}>
+              Edit Class Details
+            </Button>
+            <Button
+              className={deleteButton}
               onClick={() => removeClass(filteredClass.classId)}
             >
               Remove Class
-            </button>
+            </Button>
           </div>
-          <h3>Period: {filteredClass.period}</h3>
         </>
       )}
       <div style={studentTitleContainer}>
         <h3 style={studentTitle}>Students</h3>
-        <button onClick={toggleAddStudentForm}>
-          {isEditAddStudentFormOn ? `Go Back` : `Edit Students`}
-        </button>
+
+        <Button
+          aria-label="edit"
+          variant="contained"
+          color="primary"
+          className={classes.margin}
+          onClick={toggleAddStudentForm}
+        >
+          {isEditAddStudentFormOn ? `Go Back` : <EditIcon />}
+        </Button>
       </div>
       {isEditAddStudentFormOn ? (
-        <AddStudentToExistingClass filteredClass={filteredClass} />
-      ) : null}
-      <ul>{studentsInClass}</ul>
+        <EditStudentForm filteredClass={filteredClass} />
+      ) : (
+        <ul>{studentsInClass}</ul>
+      )}
       <hr />
     </div>
   );
 }
 
-const styles = {
+const styles = theme => ({
+  fab: {
+    margin: theme.spacing(1)
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1)
+  },
+  deleteButton: {
+    backgroundColor: 'red',
+    height: '3em',
+    marginTop: '1.5em',
+    marginLeft: '1em'
+  },
   subjectTitleContainer: {
     display: 'flex',
     flexDirection: 'row'
@@ -99,16 +117,9 @@ const styles = {
     marginTop: '1.5em',
     backgroundColor: 'orange'
   },
-  deleteButton: {
-    backgroundColor: 'red',
-    height: '3em',
-    marginTop: '1.5em',
-    marginLeft: '1em'
-  },
   button: {
-    height: '3em',
-    marginTop: '1.5em',
-    marginLeft: '1em',
-    backgroundColor: 'green'
+    margin: theme.spacing(1)
   }
-};
+});
+
+export default withStyles(styles)(OneClass);
