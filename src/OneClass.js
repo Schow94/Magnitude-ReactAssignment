@@ -4,11 +4,13 @@ import { ScheduleContext } from "./contexts/ScheduleContext";
 import useToggle from "./hooks/useToggle";
 import EditClassForm from "./EditClassForm";
 import EditStudentForm from "./EditStudentForm";
+import AddStudentToExistingClass from "./AddStudentToExistingClass";
 
 export default function OneClass(props) {
 	const { schedule, setSchedule } = useContext(ScheduleContext);
 	const [isEditClassFormOn, toggleClassForm] = useToggle(false);
 	const [isEditStudentFormOn, toggleStudentForm] = useToggle(false);
+	const [isEditAddStudentFormOn, toggleAddStudentForm] = useToggle(false);
 
 	const {
 		subjectTitleContainer,
@@ -71,8 +73,10 @@ export default function OneClass(props) {
 			)}
 			<div style={studentTitleContainer}>
 				<h3 style={studentTitle}>Students</h3>
+				<button onClick={toggleAddStudentForm}>Add another student</button>
 			</div>
-			{isEditStudentFormOn ? <EditStudentForm /> : <ul>{studentsInClass}</ul>}
+			{isEditAddStudentFormOn ? <AddStudentToExistingClass /> : null}
+			<ul>{studentsInClass}</ul>
 			<hr />
 		</div>
 	);

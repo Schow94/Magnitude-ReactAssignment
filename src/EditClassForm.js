@@ -16,7 +16,8 @@ export default function EditForm(props) {
 		filteredClass.subject
 	);
 
-	//figure out which class was clicked on & filter through all classes to get ours
+	// Hook to keep track of multiple student inputs before submitting
+
 	const saveChange = e => {
 		e.preventDefault();
 		// Map through each class and if todo is unaltered, return that todo
@@ -52,10 +53,6 @@ export default function EditForm(props) {
 					placeholder="subject"
 					value={subject}
 				/>
-
-				<button>Add another student</button>
-
-				{students.length === 1 ? null : <button>Remove extra student</button>}
 			</form>
 		</div>
 	);
