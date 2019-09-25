@@ -9,6 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 
 function Navbar(props) {
   const { classes } = props;
+  const { login } = classes;
 
   return (
     <div className={classes.root}>
@@ -23,7 +24,7 @@ function Navbar(props) {
           <Typography variant="h6" className={classes.title}>
             Welcome Teacher
           </Typography>
-          <Button color="inherit">Login</Button>
+          <Button className={login}>Login</Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -39,6 +40,10 @@ const styles = theme => ({
   },
   title: {
     flexGrow: 1
+  },
+  login: {
+    backgroundColor: 'red',
+    padding: '0.7em'
   }
 });
 

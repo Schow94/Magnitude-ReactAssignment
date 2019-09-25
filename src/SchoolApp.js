@@ -7,13 +7,16 @@ import Button from '@material-ui/core/Button';
 
 // import TestAutoSuggestion from './TestAutoSuggestion';
 import Navbar from './Navbar';
-
+import LoginForm from './LoginForm';
 import Teacher from './Teacher';
 import AddForm from './AddForm';
 import useToggle from './hooks/useToggle';
 
 function SchoolApp(props) {
   const [addNewClassFormOn, toggle] = useToggle(false);
+
+  const [LoginInFormOn, toggleLoginInForm] = useToggle(false);
+
   const { classes } = props;
   const { addClassButton, title } = classes;
 
@@ -28,10 +31,10 @@ function SchoolApp(props) {
         <Button className={addClassButton} onClick={toggle}>
           {addNewClassFormOn ? 'Close Form' : 'Add A New Class'}
         </Button>
-        {addNewClassFormOn ? <AddForm /> : null}
-
+        {addNewClassFormOn ? <AddForm toggle={toggle} /> : null}
         <Teacher />
       </div>
+      )}
     </>
   );
 }

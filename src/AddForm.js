@@ -35,7 +35,7 @@ function AddForm(props) {
     }
   ]);
 
-  const { classes } = props;
+  const { classes, toggle } = props;
   const { container, textField, dense, menu, addClassButton } = classes;
 
   // structure of students INPUT:
@@ -145,13 +145,18 @@ function AddForm(props) {
     // console.log(schedule);
     //Clearing Form
     setStudents([{ studentId: uuid(), first: '', last: '', grade: '' }]);
+    toggle();
   };
 
   return (
     <Card className={container}>
       <h1>Add a new class</h1>
       <form onSubmit={addNewClass}>
-        <Button className={addClassButton} aria-label="add-new-class">
+        <Button
+          onClick={addNewClass}
+          className={addClassButton}
+          aria-label="add-new-class"
+        >
           Add New Class
         </Button>
 

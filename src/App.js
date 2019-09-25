@@ -1,14 +1,14 @@
 import React from 'react';
 import SchoolApp from './SchoolApp';
 import { ScheduleProvider } from './contexts/ScheduleContext';
-import { ClassSizeProvider } from './contexts/ClassSizeContext';
+import { LogInProvider } from './contexts/LogInContext';
 
 export default function App() {
   return (
-    <ScheduleProvider>
-      <ClassSizeProvider>
+    <LogInProvider>
+      <ScheduleProvider>
         <SchoolApp />
-      </ClassSizeProvider>
-    </ScheduleProvider>
+      </ScheduleProvider>
+    </LogInProvider>
   );
 }
