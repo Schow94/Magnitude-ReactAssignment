@@ -37,7 +37,8 @@ function OneClass(props) {
     title,
     pos,
     buttons,
-    editStudents
+    editStudents,
+    list
   } = classes;
 
   // REMOVE CLASS
@@ -45,10 +46,6 @@ function OneClass(props) {
     const newScheduleList = schedule.filter(x => x.classId !== clickedId);
     setSchedule(newScheduleList);
     // console.log(id);
-  };
-
-  const editClass = () => {
-    toggleClassForm();
   };
 
   return (
@@ -72,7 +69,7 @@ function OneClass(props) {
               Subject: {filteredClass.subject}
             </Typography>
             <CardActions className={buttons}>
-              <Button className={editButton} onClick={() => editClass()}>
+              <Button className={editButton} onClick={toggleClassForm}>
                 Edit Class Details
               </Button>
               <Button
@@ -104,7 +101,7 @@ function OneClass(props) {
             toggleForm={toggleAddStudentForm}
           />
         ) : (
-          <List>{studentsInClass}</List>
+          <List className={list}>{studentsInClass}</List>
         )}
       </CardContent>
     </Card>
@@ -171,6 +168,10 @@ const styles = theme => ({
   },
   pos: {
     marginBottom: 12
+  },
+  list: {
+    display: 'flex',
+    flexDirection: 'column'
   }
 });
 

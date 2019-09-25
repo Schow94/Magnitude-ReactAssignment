@@ -11,6 +11,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import SaveIcon from '@material-ui/icons/Save';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
 
 import useInputState from './hooks/useInputState';
 import { ScheduleContext } from './contexts/ScheduleContext';
@@ -35,7 +36,7 @@ function AddForm(props) {
   ]);
 
   const { classes } = props;
-  const { container, textField, dense, menu } = classes;
+  const { container, textField, dense, menu, addClassButton } = classes;
 
   // structure of students INPUT:
   // students = [
@@ -147,10 +148,12 @@ function AddForm(props) {
   };
 
   return (
-    <div>
+    <Card className={container}>
       <h1>Add a new class</h1>
       <form onSubmit={addNewClass}>
-        <Button aria-label="add-new-class">Add New Class</Button>
+        <Button className={addClassButton} aria-label="add-new-class">
+          Add New Class
+        </Button>
 
         <TextField
           autoComplete="off"
@@ -192,14 +195,16 @@ function AddForm(props) {
           </Fab>
         )}
       </form>
-    </div>
+    </Card>
   );
 }
 
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: '2em'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -214,6 +219,11 @@ const styles = theme => ({
   },
   fab: {
     margin: theme.spacing(1)
+  },
+  addClassButton: {
+    height: '3em',
+    marginTop: '1.5em',
+    backgroundColor: 'orange'
   }
 });
 

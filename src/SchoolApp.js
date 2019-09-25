@@ -15,14 +15,16 @@ import useToggle from './hooks/useToggle';
 function SchoolApp(props) {
   const [addNewClassFormOn, toggle] = useToggle(false);
   const { classes } = props;
-  const { addClassButton } = classes;
+  const { addClassButton, title } = classes;
 
   return (
     <>
       <CssBaseline />
       <Navbar />
       <div style={styles.main}>
-        <Typography variant="h3">Manage your students</Typography>
+        <Typography className={title} variant="h3">
+          Manage your students
+        </Typography>
         <Button className={addClassButton} onClick={toggle}>
           {addNewClassFormOn ? 'Close Form' : 'Add A New Class'}
         </Button>
@@ -41,9 +43,10 @@ const styles = {
     alignItems: 'center'
   },
   addClassButton: {
-    marginTop: '3em',
+    margin: '2em',
     backgroundColor: 'cyan'
-  }
+  },
+  title: { marginTop: '1em' }
 };
 
 export default withStyles(styles)(SchoolApp);

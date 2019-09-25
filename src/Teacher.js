@@ -5,11 +5,9 @@ import TextField from '@material-ui/core/TextField';
 import Container from '@material-ui/core/Container';
 
 import { ScheduleContext } from './contexts/ScheduleContext';
-import EditClassForm from './EditClassForm';
 import OneClass from './OneClass';
 import OneStudent from './OneStudent';
 
-import useToggle from './hooks/useToggle';
 import useInputState from './hooks/useInputState';
 
 function Teacher(props) {
