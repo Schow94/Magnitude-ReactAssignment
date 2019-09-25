@@ -17,7 +17,7 @@ import uuid from 'uuid/v4';
 function EditStudentForm(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
 
-  const { filteredClass, classes } = props;
+  const { filteredClass, classes, toggleForm } = props;
   const {
     button,
     fab,
@@ -49,6 +49,7 @@ function EditStudentForm(props) {
         [e.target.name]: e.target.value
       };
     });
+    console.log(newStudents);
 
     setStudents(newStudents);
   };
@@ -60,7 +61,7 @@ function EditStudentForm(props) {
       return (
         <div key={i}>
           <form
-            onSubmit={addNewStudents}
+            onSubmit={saveChanges}
             className={container}
             noValidate
             autoComplete="off"
@@ -122,27 +123,22 @@ function EditStudentForm(props) {
   };
 
   //ADD NEWLY ADDED/UPDATED STUDENTS TO CLASS & SCHEDULE
-  const addNewStudents = e => {
+  const saveChanges = e => {
     e.preventDefault();
 
-    // console.log(students);
+    const updateClass = schedule.map(x => {
+      return x.classId === filteredClass.classId
+        ? { ...x, students: students }
+        : x;
+    });
+    console.log('updateclass', updateClass);
 
-    let newClass = {
-      classId: uuid(),
-      period: filteredClass.period,
-      subject: filteredClass.subject,
-      students: students
-    };
+    setSchedule(updateClass);
 
-    console.log('newClass', newClass);
-
-    setSchedule([newClass, ...schedule]);
     console.log('schedule', schedule);
     //Clearing Form
-
-    // setStudents([{ studentId: uuid(), first: '', last: '', grade: '' }]);
+    toggleForm();
   };
-
   return (
     <>
       {renderStudentInputs()}
@@ -165,7 +161,7 @@ function EditStudentForm(props) {
           <Typography variant="h4">-</Typography>
         </Fab>
       )}
-      <Button onClick={addNewStudents} className={button} color="primary">
+      <Button onClick={saveChanges} className={button} color="primary">
         <SaveIcon />
       </Button>
     </>

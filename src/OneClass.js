@@ -13,7 +13,6 @@ import EditStudentForm from './EditStudentForm';
 function OneClass(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
   const [isEditClassFormOn, toggleClassForm] = useToggle(false);
-  const [isEditStudentFormOn, toggleStudentForm] = useToggle(false);
   const [isEditAddStudentFormOn, toggleAddStudentForm] = useToggle(false);
 
   const {
@@ -75,7 +74,10 @@ function OneClass(props) {
         </Button>
       </div>
       {isEditAddStudentFormOn ? (
-        <EditStudentForm filteredClass={filteredClass} />
+        <EditStudentForm
+          filteredClass={filteredClass}
+          toggleForm={toggleAddStudentForm}
+        />
       ) : (
         <ul>{studentsInClass}</ul>
       )}
