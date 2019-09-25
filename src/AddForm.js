@@ -1,12 +1,23 @@
 import React, { useContext, useState } from 'react';
 
+import withStyles from '@material-ui/core/styles/withStyles';
+import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
+import Fab from '@material-ui/core/Fab';
+import Icon from '@material-ui/core/Icon';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveIcon from '@material-ui/icons/Save';
+import Button from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+
 import useInputState from './hooks/useInputState';
 import { ScheduleContext } from './contexts/ScheduleContext';
-// import { ClassSizeContext } from './contexts/ClassSizeContext';
-// import Select from './Select';
+
 import uuid from 'uuid/v4';
 
-export default function AddForm(props) {
+function AddForm(props) {
   const { schedule, setSchedule } = useContext(ScheduleContext);
   // const { num } = useContext(ClassSizeContext);
 
@@ -22,6 +33,9 @@ export default function AddForm(props) {
       grade: ''
     }
   ]);
+
+  const { classes } = props;
+  const { container, textField, dense, menu } = classes;
 
   // structure of students INPUT:
   // students = [
@@ -61,30 +75,36 @@ export default function AddForm(props) {
   const renderStudentInputs = () => {
     return students.map((x, i) => {
       return (
-        <div key={i}>
+        <Container key={i}>
           <h4>{`Student ${i + 1}`}</h4>
-          <input
+          <TextField
             type="text"
-            placeholder={`First Name`}
+            label={`First Name`}
+            className={classes.textField}
             value={x.first}
             onChange={handleStudentInputChange(i)}
             name="first"
+            margin="normal"
           />
-          <input
+          <TextField
+            className={classes.textField}
             type="text"
-            placeholder={`Last Name`}
+            label={`Last Name`}
             value={x.last}
             onChange={handleStudentInputChange(i)}
             name="last"
+            margin="normal"
           />
-          <input
+          <TextField
+            className={classes.textField}
             type="number"
-            placeholder={`Grade Level`}
+            label={`Grade Level`}
             value={x.grade}
             onChange={handleStudentInputChange(i)}
             name="grade"
+            margin="normal"
           />
-        </div>
+        </Container>
       );
     });
   };
@@ -130,30 +150,71 @@ export default function AddForm(props) {
     <div>
       <h1>Add a new class</h1>
       <form onSubmit={addNewClass}>
-        <button>Add New Class</button>
+        <Button aria-label="add-new-class">Add New Class</Button>
 
-        <input
+        <TextField
           autoComplete="off"
           onChange={handlePeriodChange}
           name="period"
-          placeholder="period"
+          label="period"
+          className={classes.textField}
           value={period}
+          margin="normal"
         />
-        <input
+        <TextField
           autoComplete="off"
           onChange={handleSubjectChange}
           name="subject"
-          placeholder="subject"
+          label="subject"
+          className={classes.textField}
           value={subject}
+          margin="normal"
         />
 
         {renderStudentInputs()}
-        <button onClick={addAnotherStudent}>Add another student</button>
+        <Fab
+          onClick={addAnotherStudent}
+          color="primary"
+          aria-label="add-student-input"
+          className={classes.fab}
+        >
+          <AddIcon />
+        </Fab>
 
         {students.length === 1 ? null : (
-          <button onClick={removeStudentInput}>Remove extra student</button>
+          <Fab
+            color="secondary"
+            aria-label="delete"
+            onClick={removeStudentInput}
+            className={classes.fab}
+          >
+            <Typography variant="h4">-</Typography>
+          </Fab>
         )}
       </form>
     </div>
   );
 }
+
+const styles = theme => ({
+  container: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 200
+  },
+  dense: {
+    marginTop: 19
+  },
+  menu: {
+    width: 200
+  },
+  fab: {
+    margin: theme.spacing(1)
+  }
+});
+
+export default withStyles(styles)(AddForm);

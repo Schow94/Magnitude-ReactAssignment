@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react';
 
 import withStyles from '@material-ui/core/styles/withStyles';
 import TextField from '@material-ui/core/TextField';
+import Container from '@material-ui/core/Container';
+
 import { ScheduleContext } from './contexts/ScheduleContext';
 import EditClassForm from './EditClassForm';
 import OneClass from './OneClass';
@@ -46,7 +48,7 @@ function Teacher(props) {
 
   return (
     //Search Bar goes here
-    <>
+    <Container>
       <form className={container} noValidate autoComplete="off">
         <TextField
           type="text"
@@ -74,21 +76,25 @@ function Teacher(props) {
             );
           });
           return (
-            <OneClass
-              filteredClass={x}
-              studentsInClass={studentsInClass}
-              key={x.classId}
-            />
+            <>
+              <OneClass
+                filteredClass={x}
+                studentsInClass={studentsInClass}
+                key={x.classId}
+              />
+              <br />
+            </>
           );
         })}
       </ul>
-    </>
+    </Container>
   );
 }
 const styles = theme => ({
   container: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    justifyContent: 'center'
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -97,9 +103,6 @@ const styles = theme => ({
   },
   dense: {
     marginTop: 19
-  },
-  menu: {
-    width: 200
   }
 });
 

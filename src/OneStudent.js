@@ -6,6 +6,8 @@ import AddIcon from '@material-ui/icons/Add';
 import Icon from '@material-ui/core/Icon';
 import DeleteIcon from '@material-ui/icons/Delete';
 import NavigationIcon from '@material-ui/icons/Navigation';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import { ScheduleContext } from './contexts/ScheduleContext';
 
@@ -38,22 +40,22 @@ function OneStudent(props) {
   };
 
   return (
-    <li>
+    <ListItem key={filteredStudent.id}>
       {filteredStudent.first} {filteredStudent.last}
       <span style={{ marginLeft: '1em' }}>
         <strong>Grade: {filteredStudent.grade}</strong>
       </span>
       <IconButton
         aria-label="delete"
-        color="red"
+        color="secondary"
         className={classes.margin}
         onClick={() =>
           removeStudent(filteredClass.classId, filteredStudent.studentId)
         }
       >
-        <DeleteIcon fontSize="medium" />
+        <DeleteIcon fontSize="large" />
       </IconButton>
-    </li>
+    </ListItem>
   );
 }
 
